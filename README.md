@@ -1,4 +1,4 @@
-## Story Consesus Implementation
+## Story Consensus Implementation
 
 Golang consensus layer implementation and staking contracts for the Story L1 blockchain.
 
@@ -6,11 +6,11 @@ Golang consensus layer implementation and staking contracts for the Story L1 blo
 [![Twitter Follow](https://img.shields.io/twitter/follow/storyprotocol?style=social)](https://twitter.com/storyprotocol)
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/storyprotocol)
 
-You may find pre-built binaries for our latest stable release in our [release page](https://github.com/piplabs/story/releases#latest).
+You may find pre-built binaries for our latest stable release on our [release page](https://github.com/piplabs/story/releases#latest).
 
 ## Architecture
 
-Story draws inspiration from ETH PoS in decoupling execution and consensus clients. The execution client relays EVM blocks into the `story` consesus client via Engine ABI, using an ABCI++ adapter to make EVM state compatible with that of CometBFT. With this architecture, consensus efficiency is no longer bottlenecked by execution transaction throughput.
+Story draws inspiration from ETH PoS in decoupling execution and consensus clients. The execution client relays EVM blocks into the `story` consensus client via Engine ABI, using an ABCI++ adapter to make EVM state compatible with that of CometBFT. With this architecture, consensus efficiency is no longer bottlenecked by execution transaction throughput.
 
 ![Node Architecture](assets/diagram.png)
 
@@ -92,7 +92,7 @@ By default, network configurations and data are stored relative to the `story` r
 ```markdown
 story/
 ├── config/
-│ ├── config.toml                  # networking & consesus settings
+│ ├── config.toml                  # networking & consensus settings
 │ ├── genesis.json                 # blockchain genesis state
 │ ├── story.toml                   # client configs
 │ ├── node_key.json                # p2p node key  [SENSITIVE]
@@ -113,7 +113,7 @@ To use your own custom root directory, you can pass the `--home` flag when initi
 For ensuring synchronization with the execution client, two settings are particularly important:
 
 **__`engine-jwt-endpoint:`__**
-This configures the JSON-RPC engine API endpoint, which facilitates commuication between the consensus and execution layer. By default, it is set to `http://localhost:8551`, but may be changed by overriding the value in `story.toml` or through the `--engine-endpoint` CLI flag.
+This configures the JSON-RPC engine API endpoint, which facilitates communication between the consensus and execution layer. By default, it is set to `http://localhost:8551`, but may be changed by overriding the value in `story.toml` or through the `--engine-endpoint` CLI flag.
 
 **__`engine-jwt-file:`__**
 To authenticate the engine API, a JWT must be passed which is created on execution client initialization. By default, this points to the default execution client JWT file path. For example, if initializing a local network via `story init --local` on Linux, this will default to `~/.story/geth/local/geth/jwtsecret`. To override, either change the value in `story.toml` or by specifying the `--engine-jwt-file` CLI flag.
